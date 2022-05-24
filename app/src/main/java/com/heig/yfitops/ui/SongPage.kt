@@ -36,8 +36,8 @@ class SongPage : ComponentActivity() {
             "",
             "Song #$it",
             "",
+            "",
             "https://e-cdns-images.dzcdn.net/images/cover/6209b102b2157cf720ded3ce5bfa1bff/264x264-000000-80-0-0.jpg",
-            emptyList()
         )
     }
 

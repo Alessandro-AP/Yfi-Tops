@@ -20,15 +20,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.heig.yfitops.domain.models.Playlist
+import com.heig.yfitops.domain.services.FirebaseRepository
 import com.heig.yfitops.ui.bottomsheet.collapsed.SheetCollapsed
 import com.heig.yfitops.ui.bottomsheet.expanded.SheetExpanded
 import com.heig.yfitops.ui.bottomsheet.currentFraction
 import com.heig.yfitops.ui.theme.YfiTopsTheme
 import kotlinx.coroutines.launch
 
+
 class PlaylistPage : ComponentActivity() {
 
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -52,6 +53,7 @@ private val list = (1..20).map { // TODO à remplacer avec la list fetch depuis 
         emptyList()
     )
 }
+//private val list = FirebaseRepository.getAllPlaylists() //TODO change with ViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
