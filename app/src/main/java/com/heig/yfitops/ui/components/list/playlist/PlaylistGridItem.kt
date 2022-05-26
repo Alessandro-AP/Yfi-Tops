@@ -7,20 +7,22 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.google.gson.Gson
 import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.ui.navigation.Screen
+import com.heig.yfitops.viewmodels.SongViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PlaylistGridItem(navController: NavController, playlist: Playlist){
+fun PlaylistGridItem(navController: NavController, playlist: Playlist, songViewModel: SongViewModel = viewModel()){
 
-    fun navigateToSongScreen(songs : List<Song>){
-        val json = Gson().toJson(songs)
-        navController.navigate(Screen.SongScreen.withArgs(json))
+    fun navigateToSongScreen(){
+        songViewModel.updateSongs(playlist.id)
+        navController.navigate(Screen.SongScreen.withArgs(playlist.id))
     }
 
     Card(
@@ -28,7 +30,7 @@ fun PlaylistGridItem(navController: NavController, playlist: Playlist){
             .size(180.dp)
             .padding(8.dp),
         onClick = {
-            navigateToSongScreen(playlist.songs)
+            navigateToSongScreen()
         }
     ) {
         AsyncImage(

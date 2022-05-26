@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import com.heig.yfitops.domain.models.Song
 
 @Composable
-fun SongList(navController: NavController, songs: List<Song>) {
+fun SongList(songs: List<Song>) {
     LazyColumn {
         items(songs) { song ->
             SongListItem(title = song.title, imageUrl = song.imageUrl)
