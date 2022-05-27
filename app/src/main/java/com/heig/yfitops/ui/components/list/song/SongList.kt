@@ -10,7 +10,7 @@ import com.heig.yfitops.domain.models.Song
 fun SongList(songs: List<Song>) {
     LazyColumn {
         items(songs) { song ->
-            SongListItem(title = song.title, imageUrl = song.imageUrl)
+            SongListItem(song)
         }
     }
 }

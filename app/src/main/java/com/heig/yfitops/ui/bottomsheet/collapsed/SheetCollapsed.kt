@@ -1,5 +1,6 @@
 package com.heig.yfitops.ui.bottomsheet.collapsed
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -11,12 +12,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.R
 import com.heig.yfitops.ui.bottomsheet.collapsed.modifier.noRippleClickable
 import com.heig.yfitops.ui.theme.bottomSheetThemeDark
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun SheetCollapsed(
@@ -25,6 +30,9 @@ fun SheetCollapsed(
     currentFraction: Float,
     onSheetClick: () -> Unit
 ) {
+    val context = LocalContext.current
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -63,7 +71,12 @@ fun SheetCollapsed(
         )
 
         IconButton(
-            onClick = { },
+            onClick = {
+                Toast.makeText(
+                context,
+                "Feature not available yet",
+                Toast.LENGTH_SHORT
+            ).show() },
             modifier = Modifier
                 .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 8.dp)
         ) {
@@ -76,7 +89,7 @@ fun SheetCollapsed(
         }
 
         IconButton(
-            onClick = { },
+            onClick = { mainViewModel.skipToNextSong() },
             modifier = Modifier
                 .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
         ) {

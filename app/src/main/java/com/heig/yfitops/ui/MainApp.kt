@@ -16,7 +16,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.ui.bottomsheet.collapsed.SheetCollapsed
 import com.heig.yfitops.ui.bottomsheet.currentFraction
 import com.heig.yfitops.ui.bottomsheet.expanded.SheetExpanded

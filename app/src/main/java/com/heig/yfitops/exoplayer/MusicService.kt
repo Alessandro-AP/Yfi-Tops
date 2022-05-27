@@ -2,6 +2,7 @@ package com.heig.yfitops.exoplayer
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
@@ -15,16 +16,11 @@ import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
-import com.heig.yfitops.R
+import com.heig.yfitops.domain.services.FirebaseRepository
 import com.heig.yfitops.exoplayer.callbacks.MusicNotificationListener
 import com.heig.yfitops.exoplayer.callbacks.MusicPlaybackPreparer
 import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 
 class MusicService : MediaBrowserServiceCompat() {
 
@@ -33,7 +29,6 @@ class MusicService : MediaBrowserServiceCompat() {
     private val musicSource = MusicSource()
     private lateinit var musicPlayerListener: MusicPlayerListener
     private lateinit var musicNotificationManager: MusicNotificationManager
-
     lateinit var exoPlayer: ExoPlayer
 
     // coroutine to avoid blocking UIThread
@@ -52,9 +47,9 @@ class MusicService : MediaBrowserServiceCompat() {
     override fun onCreate() {
         super.onCreate()
 
-//        serviceScope.launch {
-//            firebaseMusicSource.fetchMediaData()
-//        }
+         serviceScope.launch {
+             musicSource.convertFormat(FirebaseRepository.getSongsByPlaylistID("LXukNF71GDvShLD2bJyG"))
+         }
 
         dataSourceFactory = DefaultDataSource.Factory(applicationContext)
 
@@ -70,7 +65,11 @@ class MusicService : MediaBrowserServiceCompat() {
 
         // Notification click triggers our activity
         val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
-            PendingIntent.getActivity(this, 0, it, 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_MUTABLE)
+            } else {
+                PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_ONE_SHOT)
+            }
         }
 
         mediaSession = MediaSessionCompat(this, SERVICE_TAG).apply {

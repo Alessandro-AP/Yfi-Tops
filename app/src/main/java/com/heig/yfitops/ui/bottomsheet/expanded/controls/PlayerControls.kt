@@ -8,12 +8,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.R
+import com.heig.yfitops.exoplayer.isPlayEnabled
+import com.heig.yfitops.exoplayer.isPlaying
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun PlayerControls() {
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -22,7 +30,7 @@ fun PlayerControls() {
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         IconButton(
-            onClick = { },
+            onClick = { mainViewModel.skipToPreviousSong() },
             modifier = Modifier
                 .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
         ) {
@@ -34,10 +42,10 @@ fun PlayerControls() {
             )
         }
 
-        PlayPauseButton(onClick = {})
+        PlayPauseButton(onClick = { /*TODO*/ })
 
         IconButton(
-            onClick = { },
+            onClick = { mainViewModel.skipToNextSong() },
             modifier = Modifier
                 .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 8.dp)
         ) {

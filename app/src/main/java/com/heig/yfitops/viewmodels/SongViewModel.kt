@@ -13,16 +13,20 @@ class SongViewModel : ViewModel() {
     private val _songsList = MutableLiveData<List<Song>>()
     val songsList : LiveData<List<Song>> = _songsList
 
+//    private val _currentPlaylistID = MutableLiveData<String>()
+//    val currentPlaylistID : LiveData<String> = _currentPlaylistID
+
     init{
         viewModelScope.launch {
             _songsList.value = emptyList()
+//            _currentPlaylistID.value = ""
         }
     }
 
 
     fun updateSongs(id : String) {
-        println("HERE with $id")
         viewModelScope.launch {
+//            _currentPlaylistID.value = id
             _songsList.value = FirebaseRepository.getSongsByPlaylistID(id)
         }
     }

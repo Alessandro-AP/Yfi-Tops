@@ -11,7 +11,6 @@ import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.heig.yfitops.domain.models.Song
-import com.heig.yfitops.exoplayer.State.*
 
 // Convert media source to a compatible format for exoplayer
 class MusicSource {
@@ -46,6 +45,7 @@ class MusicSource {
         val desc = MediaDescriptionCompat.Builder()
             .setMediaId(song.description.mediaId)
             .setTitle(song.description.title)
+            .setSubtitle(song.description.subtitle)
             .setMediaUri(song.getString(METADATA_KEY_MEDIA_URI).toUri())
             .setIconUri(song.description.iconUri)
             .build()

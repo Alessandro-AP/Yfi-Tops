@@ -88,8 +88,12 @@ dependencies {
     api "com.google.android.exoplayer:extension-mediasession:2.17.1"
     implementation("androidx.media:media:1.6.0")
 
+    //Glide (used for images)
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+    annotationProcessor "com.github.bumptech.glide:compiler:4.12.0"
+
     // Json
-    implementation 'com.google.code.gson:gson:2.9.0'
+//    implementation 'com.google.code.gson:gson:2.9.0'
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

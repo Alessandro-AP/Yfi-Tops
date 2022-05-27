@@ -13,8 +13,6 @@ import com.heig.yfitops.domain.models.Playlist
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlaylistGrid(navController: NavController, playlists: List<Playlist>) {
-//    val context = LocalContext.current
-
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp)

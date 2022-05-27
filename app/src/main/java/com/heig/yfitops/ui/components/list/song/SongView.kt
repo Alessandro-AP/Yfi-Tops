@@ -13,5 +13,6 @@ import com.heig.yfitops.viewmodels.SongViewModel
 @Composable
 fun SongListView(playlistID: String, songViewModel: SongViewModel = viewModel()) {
     val list by songViewModel.songsList.observeAsState(null)
+    songViewModel.updateSongs(playlistID)
     list?.let { SongList(it) }
 }

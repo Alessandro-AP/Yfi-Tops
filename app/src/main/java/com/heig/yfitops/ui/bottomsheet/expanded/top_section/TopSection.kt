@@ -1,5 +1,6 @@
 package com.heig.yfitops.ui.bottomsheet.expanded.top_section
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -7,14 +8,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.heig.yfitops.R
 import com.heig.yfitops.utils.Time
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun TopSection(title: String) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -46,7 +52,13 @@ fun TopSection(title: String) {
             }
             Spacer(Modifier.weight(1f))
             IconButton(
-                onClick = { },
+                onClick = {
+                    Toast.makeText(
+                        context,
+                        "Feature not available yet",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
                 modifier = Modifier
                     .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 16.dp)
             ) {
