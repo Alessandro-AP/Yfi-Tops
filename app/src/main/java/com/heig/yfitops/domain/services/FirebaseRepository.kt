@@ -22,7 +22,11 @@ class FirebaseRepository {
     private val _currentSongs = MutableLiveData<Resource<List<Song>>>()
     val currentSongs: LiveData<Resource<List<Song>>> = _currentSongs
 
-    fun updatePlaylist(songs: Resource<List<Song>>) {
+    private val _currentPlaylist = MutableLiveData("")
+    val currentPlaylist: LiveData<String> = _currentPlaylist
+
+    fun updatePlaylist(id: String, songs: Resource<List<Song>>) {
+        _currentPlaylist.postValue(id)
         _currentSongs.postValue(songs)
     }
 

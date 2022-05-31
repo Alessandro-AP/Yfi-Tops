@@ -7,7 +7,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.MyApp
-import com.heig.yfitops.utils.Resource
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +21,7 @@ fun SongListView(playlistID: String) {
         viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
 
     CoroutineScope(Dispatchers.IO).launch {
-        mainViewModel.updatePlaylist(Resource.success(mainViewModel.getSongsByPlaylistID(playlistID)))
+        mainViewModel.updatePlaylist(playlistID)
     }
 
     val list by mainViewModel.mediaItems.observeAsState()

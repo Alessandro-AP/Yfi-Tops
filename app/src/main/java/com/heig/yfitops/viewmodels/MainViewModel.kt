@@ -12,17 +12,19 @@ import com.heig.yfitops.exoplayer.isPlaying
 import com.heig.yfitops.utils.Resource
 
 
-class MainViewModel(private val application: Application) : ViewModel() {
+class MainViewModel(application: Application) : ViewModel() {
 
-    private val _mediaItems = (application as MyApp).repository.currentSongs
+    private val firebaseRepo = (application as MyApp).repository
+
+    private val _mediaItems = firebaseRepo.currentSongs
     val mediaItems: LiveData<Resource<List<Song>>> = _mediaItems
 
-    fun updatePlaylist(songs: Resource<List<Song>>) =
-        (application as MyApp).repository.updatePlaylist(songs)
-
-    suspend fun getSongsByPlaylistID(id: String): List<Song> =
-        (application as MyApp).repository.getSongsByPlaylistID(id)
-
+    suspend fun updatePlaylist(id: String) {
+        if (id != firebaseRepo.currentPlaylist.value) {
+            val songs = Resource.success(firebaseRepo.getSongsByPlaylistID(id))
+            firebaseRepo.updatePlaylist(id, songs)
+        }
+    }
 
     private val musicServiceConnection: MusicServiceConnection =
         MusicServiceConnection(application.applicationContext)
