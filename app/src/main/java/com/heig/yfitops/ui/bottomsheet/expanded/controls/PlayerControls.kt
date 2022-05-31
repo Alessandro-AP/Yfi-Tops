@@ -14,14 +14,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
-import com.heig.yfitops.exoplayer.isPlayEnabled
-import com.heig.yfitops.exoplayer.isPlaying
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun PlayerControls() {
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val mainViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
 
     Row(
         modifier = Modifier
@@ -43,7 +42,7 @@ fun PlayerControls() {
             )
         }
 
-        PlayPauseButton(onClick = {mainViewModel.startStop()})
+        PlayPauseButton(onClick = { mainViewModel.startStop() })
 
         IconButton(
             onClick = { mainViewModel.skipToNextSong() },

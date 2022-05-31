@@ -17,10 +17,7 @@ class MusicServiceConnection(
     context: Context
 ) {
     private val _isConnected = MutableLiveData<Event<Resource<Boolean>>>()
-//    val isConnected: LiveData<Event<Resource<Boolean>>> = _isConnected
-
     private val _networkError = MutableLiveData<Event<Resource<Boolean>>>()
-//    val networkError: LiveData<Event<Resource<Boolean>>> = _networkError
 
     private val _playbackState = MutableLiveData<PlaybackStateCompat?>()
     val playbackState: LiveData<PlaybackStateCompat?> = _playbackState
@@ -45,14 +42,6 @@ class MusicServiceConnection(
     val transportControls: MediaControllerCompat.TransportControls
         get() = mediaController.transportControls
 
-    fun subscribe(parentId: String, callback: MediaBrowserCompat.SubscriptionCallback) {
-        mediaBrowser.subscribe(parentId, callback)
-    }
-
-    fun unsubscribe(parentId: String, callback: MediaBrowserCompat.SubscriptionCallback) {
-        mediaBrowser.unsubscribe(parentId, callback)
-    }
-
     private inner class MediaBrowserConnectionCallback(
         private val context: Context
     ) : MediaBrowserCompat.ConnectionCallback() {
@@ -60,7 +49,7 @@ class MusicServiceConnection(
         override fun onConnected() {
             Log.d("MusicServiceConnection", "CONNECTED")
             mediaController = MediaControllerCompat(context, mediaBrowser.sessionToken).apply {
-                registerCallback(MediaContollerCallback())
+                registerCallback(MediaControllerCallback())
             }
             _isConnected.postValue(Event(Resource.success(true)))
         }
@@ -88,7 +77,7 @@ class MusicServiceConnection(
         }
     }
 
-    private inner class MediaContollerCallback : MediaControllerCompat.Callback() {
+    private inner class MediaControllerCallback : MediaControllerCompat.Callback() {
 
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
             _playbackState.postValue(state)

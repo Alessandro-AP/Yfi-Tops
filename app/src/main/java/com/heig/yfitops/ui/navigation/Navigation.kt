@@ -29,26 +29,3 @@ fun Navigation(list: List<Playlist>) {
 
     }
 }
-
-//@Composable
-//fun Navigation(list: List<Playlist>) {
-//    val navController = rememberNavController()
-//    NavHost(navController = navController, startDestination = Screen.PlaylistScreen.route) {
-//        composable(route = Screen.PlaylistScreen.route) {
-//            PlaylistView(navController = navController, playlists = list)
-//        }
-//        composable(route = Screen.SongScreen.route + "/{songs}",
-//            arguments = listOf(navArgument("songs") {
-//                type = NavType.StringType
-//            })
-//        ) { entry ->
-//            entry.arguments?.getString("songs")?.let { json ->
-//                println("ENTRY JSON : $json")
-//                val songs: List<Song> =
-//                    Gson().fromJson(json, object : TypeToken<List<Song>>() {}.type)
-//                SongListView(navController = navController, songs = songs)
-//            }
-//
-//        }
-//    }
-//}

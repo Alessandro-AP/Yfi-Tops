@@ -17,7 +17,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
-import com.heig.yfitops.exoplayer.currentPlaybackPosition
 import com.heig.yfitops.exoplayer.toSong
 import com.heig.yfitops.utils.Time
 import com.heig.yfitops.viewmodels.MainViewModel
@@ -87,10 +86,10 @@ fun TopSection() {
 
 @Composable
 fun PlayerSlider(seconds: String) {
-//    var sliderPosition by remember { mutableStateOf(0F) }
+    val application = LocalContext.current.applicationContext as MyApp
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(application))
+    val songViewModel : SongViewModel = viewModel(factory = SongViewModelFactory(application))
 
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
-    val songViewModel : SongViewModel = viewModel(factory = SongViewModelFactory(LocalContext.current))
     val playerState by mainViewModel.playbackState.observeAsState()
     val currentPosition = playerState?.position
 
@@ -98,9 +97,9 @@ fun PlayerSlider(seconds: String) {
     var sliderIsChanging by remember { mutableStateOf(false) }
 
     var localSliderValue by remember { mutableStateOf(0f) }
-//
-//    val sliderProgress =
-//        if (sliderIsChanging) localSliderValue else songViewModel.currentPlayerPosition
+
+    val sliderProgress =
+        if (sliderIsChanging) localSliderValue else songViewModel.currentPlayerPosition
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -114,10 +113,10 @@ fun PlayerSlider(seconds: String) {
                 localSliderValue = newPosition
                 sliderIsChanging = true
             },
-//            onValueChangeFinished = {
-//                mainViewModel.seekTo(songViewModel.currentSongDuration * localSliderValue)
-//                sliderIsChanging = false
-//            },
+            onValueChangeFinished = {
+                mainViewModel.seekTo(songViewModel.currentSongDuration * localSliderValue)
+                sliderIsChanging = false
+            },
             colors = SliderDefaults.colors(
                 thumbColor = Color.White,
                 activeTrackColor = Color.White

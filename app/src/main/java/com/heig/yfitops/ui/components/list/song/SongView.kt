@@ -7,7 +7,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.MyApp
-import com.heig.yfitops.domain.services.FirebaseRepository
 import com.heig.yfitops.utils.Resource
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
@@ -19,8 +18,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun SongListView(playlistID: String) {
 
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
-//    mainViewModel.updatePlaylist(Resource.loading(emptyList()))
+    val mainViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+
     CoroutineScope(Dispatchers.IO).launch {
         mainViewModel.updatePlaylist(Resource.success(mainViewModel.getSongsByPlaylistID(playlistID)))
     }
@@ -30,21 +30,3 @@ fun SongListView(playlistID: String) {
     println("SONG LIST $list")
     list?.data?.let { if (it.isNotEmpty()) SongList(it) }
 }
-
-//
-///**
-// * Center a circular indeterminate progress bar with optional vertical bias.
-// */
-//@Composable
-//fun CircularIndeterminateProgressBar() {
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(top = 20.dp),
-//            horizontalArrangement = Arrangement.Center
-//        ) {
-//            CircularProgressIndicator(
-//                color = MaterialTheme.colors.primary
-//            )
-//        }
-//}

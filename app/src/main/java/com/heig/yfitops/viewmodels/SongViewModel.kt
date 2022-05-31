@@ -1,6 +1,6 @@
 package com.heig.yfitops.viewmodels
 
-import android.content.Context
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -13,11 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SongViewModel (
-    context: Context
-) : ViewModel() {
+class SongViewModel (application: Application) : ViewModel() {
 
-    private val musicServiceConnection: MusicServiceConnection = MusicServiceConnection(context)
+    private val musicServiceConnection: MusicServiceConnection = MusicServiceConnection(application.applicationContext)
 
     private val playbackState = musicServiceConnection.playbackState
 
@@ -49,15 +47,6 @@ class SongViewModel (
         delay(100L)
         updateCurrentPlaybackPosition()
     }
-
-//    fun calculateColorPalette(drawable: Bitmap, onFinish: (Color) -> Unit) {
-//
-//        Palette.from(drawable).generate { palette ->
-//            palette?.dominantSwatch?.rgb?.let { colorValue ->
-//                onFinish(Color(colorValue))
-//            }
-//        }
-//    }
 
     private fun formatLong(value: Long): String {
         val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())

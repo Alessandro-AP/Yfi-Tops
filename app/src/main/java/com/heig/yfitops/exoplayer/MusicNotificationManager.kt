@@ -24,7 +24,8 @@ class MusicNotificationManager(
     private val notificationManager: PlayerNotificationManager
 
     init {
-        val mediaController = MediaControllerCompat(context, sessionToken) // to control current media in notification
+        val mediaController =
+            MediaControllerCompat(context, sessionToken) // to control current media in notification
         notificationManager =
             PlayerNotificationManager.Builder(context, NOTIFICATION_ID, NOTIFICATION_CHANNEL_ID)
                 .setChannelNameResourceId(R.string.notification_channel_name)
@@ -48,6 +49,7 @@ class MusicNotificationManager(
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): CharSequence {
+            newSongCallback()
             return mediaController.metadata.description.title.toString()
         }
 

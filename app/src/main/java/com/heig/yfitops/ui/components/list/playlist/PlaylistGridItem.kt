@@ -7,18 +7,16 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.ui.navigation.Screen
-//import com.heig.yfitops.viewmodels.SongViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PlaylistGridItem(navController: NavController, playlist: Playlist){
+fun PlaylistGridItem(navController: NavController, playlist: Playlist) {
 
-    fun navigateToSongScreen(){
+    fun navigateToSongScreen() {
         navController.navigate(Screen.SongScreen.withArgs(playlist.id))
     }
 

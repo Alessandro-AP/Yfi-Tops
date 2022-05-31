@@ -3,19 +3,19 @@ package com.heig.yfitops.domain.models
 import android.os.Parcelable
 import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
-import com.heig.yfitops.utils.Costants.SONG_ARTIST
-import com.heig.yfitops.utils.Costants.SONG_IMAGE_URL
-import com.heig.yfitops.utils.Costants.SONG_TITLE
-import com.heig.yfitops.utils.Costants.SONG_TRACK_URL
+import com.heig.yfitops.utils.Constants.SONG_ARTIST
+import com.heig.yfitops.utils.Constants.SONG_IMAGE_URL
+import com.heig.yfitops.utils.Constants.SONG_TITLE
+import com.heig.yfitops.utils.Constants.SONG_TRACK_URL
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Song(
-    val id : String,
-    val title : String,
-    val artist : String,
-    val trackUrl : String,
-    val imageUrl : String,
+    val id: String,
+    val title: String,
+    val artist: String,
+    val trackUrl: String,
+    val imageUrl: String,
 ) : Parcelable {
     companion object {
         fun DocumentSnapshot.toSong(): Song? {

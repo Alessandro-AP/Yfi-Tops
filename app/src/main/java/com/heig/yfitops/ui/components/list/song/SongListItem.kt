@@ -21,13 +21,14 @@ import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun SongListItem(song: Song) {
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val mainViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
 
     Row(
         Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable {  mainViewModel.playSong(song) }) {
+            .clickable { mainViewModel.playSong(song) }) {
         AsyncImage(
             model = song.imageUrl,
             contentDescription = null,

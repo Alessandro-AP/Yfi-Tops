@@ -23,8 +23,6 @@ import com.heig.yfitops.ui.bottomsheet.currentFraction
 import com.heig.yfitops.ui.bottomsheet.expanded.SheetExpanded
 import com.heig.yfitops.ui.navigation.Navigation
 import com.heig.yfitops.ui.theme.YfiTopsTheme
-import com.heig.yfitops.viewmodels.MainViewModel
-import com.heig.yfitops.viewmodels.MainViewModelFactory
 import com.heig.yfitops.viewmodels.PlaylistViewModel
 import com.heig.yfitops.viewmodels.PlaylistViewModelFactory
 import kotlinx.coroutines.launch
@@ -50,7 +48,8 @@ class MainApp : ComponentActivity() {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen() {
-    val playlistViewModel : PlaylistViewModel = viewModel(factory = PlaylistViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val playlistViewModel: PlaylistViewModel =
+        viewModel(factory = PlaylistViewModelFactory(LocalContext.current.applicationContext as MyApp))
     val list by playlistViewModel.playlists.observeAsState(null)
     val scope = rememberCoroutineScope()
 
@@ -81,7 +80,7 @@ fun HomeScreen() {
                     .fillMaxHeight(fraction = 0.95f)
                     .fillMaxWidth()
             ) {
-                SheetExpanded (name = title)
+                SheetExpanded()
                 SheetCollapsed(
                     isCollapsed = scaffoldState.bottomSheetState.isCollapsed,
                     currentFraction = scaffoldState.currentFraction,
@@ -90,7 +89,7 @@ fun HomeScreen() {
             }
         },
         sheetPeekHeight = 72.dp
-    ){
+    ) {
         list?.let { Navigation(list = it) }
     }
 }

@@ -9,8 +9,8 @@ import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.domain.models.Playlist.Companion.toPlaylist
 import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.domain.models.Song.Companion.toSong
-import com.heig.yfitops.utils.Costants.FIRESTORE_PLAYLIST_COLLECTION
-import com.heig.yfitops.utils.Costants.PLAYLIST_SONGS
+import com.heig.yfitops.utils.Constants.FIRESTORE_PLAYLIST_COLLECTION
+import com.heig.yfitops.utils.Constants.PLAYLIST_SONGS
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.tasks.await
 
@@ -20,9 +20,9 @@ class FirebaseRepository {
         FirebaseFirestore.getInstance().collection(FIRESTORE_PLAYLIST_COLLECTION)
 
     private val _currentSongs = MutableLiveData<Resource<List<Song>>>()
-    val currentSongs : LiveData<Resource<List<Song>>> = _currentSongs
+    val currentSongs: LiveData<Resource<List<Song>>> = _currentSongs
 
-    fun updatePlaylist(songs : Resource<List<Song>>){
+    fun updatePlaylist(songs: Resource<List<Song>>) {
         _currentSongs.postValue(songs)
     }
 

@@ -1,6 +1,6 @@
 package com.heig.yfitops.utils
 
-object Costants {
+object Constants {
 
     // Playlist Firebase Metadata
     const val FIRESTORE_PLAYLIST_COLLECTION = "Playlists"
@@ -14,5 +14,8 @@ object Costants {
     const val SONG_ARTIST = "artist"
     const val SONG_TRACK_URL = "trackUrl"
     const val SONG_IMAGE_URL = "imageUrl"
+
+    const val MEDIA_ROOT_ID = "root_id"
+
 
 }

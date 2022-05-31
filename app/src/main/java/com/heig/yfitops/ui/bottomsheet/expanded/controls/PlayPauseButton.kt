@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,11 +39,10 @@ fun PlayPauseButton(onClick: () -> Unit) {
 fun CircleIconButtonLarge(
     onClick: () -> Unit
 ) {
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val mainViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
     val playerState by mainViewModel.playbackState.observeAsState()
     val isPlaying = playerState?.isPlaying
-
-//    var playerState by remember { mutableStateOf(false) }
 
     Box(
         contentAlignment = Alignment.Center,

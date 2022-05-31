@@ -5,7 +5,7 @@ import com.heig.yfitops.domain.services.FirebaseRepository
 
 class MyApp : Application() {
 
-    val repository by lazy{
+    val repository by lazy {
         FirebaseRepository()
     }
 }

@@ -19,7 +19,7 @@ import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.domain.models.Song
-import com.heig.yfitops.domain.services.FirebaseRepository
+import com.heig.yfitops.utils.Constants.MEDIA_ROOT_ID
 import com.heig.yfitops.exoplayer.callbacks.MusicNotificationListener
 import com.heig.yfitops.exoplayer.callbacks.MusicPlaybackPreparer
 import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
@@ -170,7 +170,6 @@ class MusicService : MediaBrowserServiceCompat() {
 
     companion object {
         private const val SERVICE_TAG = "MusicService"
-        private const val MEDIA_ROOT_ID = "root_id"
         var curSongDuration = 0L
             private set // write only inside service (but read outside)
     }
