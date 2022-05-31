@@ -61,7 +61,8 @@ class MusicService : MediaBrowserServiceCompat() {
                 mediaSession.sessionToken,
                 MusicNotificationListener(this)
             ) {
-                curSongDuration = exoPlayer.duration
+                // Keep old value until new value is loaded
+                curSongDuration =  if (exoPlayer.duration > 0)  exoPlayer.duration else curSongDuration
             }
 
             musicNotificationManager.showNotification(exoPlayer)
@@ -79,6 +80,7 @@ class MusicService : MediaBrowserServiceCompat() {
                     .build(), true
             )
             setHandleAudioBecomingNoisy(true)
+
         }
 
         musicPlayerListener = MusicPlayerListener(this)

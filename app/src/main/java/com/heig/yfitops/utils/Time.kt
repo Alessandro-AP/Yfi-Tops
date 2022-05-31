@@ -1,9 +1,12 @@
 package com.heig.yfitops.utils
 
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 
 object Time {
-    fun convertSeconds(seconds : String): String {
-        val s = seconds.toLong()
-        return String.format("%02d:%02d", (s % 3600) / 60, (s % 3600) % 60)
+    fun convertToMMSS(value: Long): String {
+        val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
+        return dateFormat.format(value)
     }
 }
