@@ -9,14 +9,21 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
+import com.heig.yfitops.exoplayer.isPlaying
 import com.heig.yfitops.ui.theme.bottomSheetThemeDark
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 
 @Composable
@@ -30,8 +37,11 @@ fun PlayPauseButton(onClick: () -> Unit) {
 fun CircleIconButtonLarge(
     onClick: () -> Unit
 ) {
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val playerState by mainViewModel.playbackState.observeAsState()
+    val isPlaying = playerState?.isPlaying
 
-    var playerState by remember { mutableStateOf(false) }
+//    var playerState by remember { mutableStateOf(false) }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -42,12 +52,12 @@ fun CircleIconButtonLarge(
             .clickable(
                 indication = rememberRipple(bounded = true),
                 interactionSource = remember { MutableInteractionSource() },
-                onClick = { playerState = !playerState; onClick() }
+                onClick = { onClick() }
             )
     ) {
         Icon(
             modifier = Modifier.size(40.dp),
-            painter = if (playerState) painterResource(id = R.drawable.ic_baseline_pause_24)
+            painter = if (isPlaying == true) painterResource(id = R.drawable.ic_baseline_pause_24)
             else painterResource(id = R.drawable.ic_baseline_play_arrow_24),
             tint = bottomSheetThemeDark,
             contentDescription = "Play Pause"

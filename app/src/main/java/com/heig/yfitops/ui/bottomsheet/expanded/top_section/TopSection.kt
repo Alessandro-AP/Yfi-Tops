@@ -15,16 +15,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
+import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
+import com.heig.yfitops.exoplayer.currentPlaybackPosition
 import com.heig.yfitops.exoplayer.toSong
 import com.heig.yfitops.utils.Time
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
+import com.heig.yfitops.viewmodels.SongViewModel
+import com.heig.yfitops.viewmodels.SongViewModelFactory
 
 @Composable
 fun TopSection() {
 
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
     val currentSongMetadata  : MediaMetadataCompat? by mainViewModel.curPlayingSong.observeAsState()
     val currentSong = currentSongMetadata?.toSong()
 
@@ -83,7 +87,20 @@ fun TopSection() {
 
 @Composable
 fun PlayerSlider(seconds: String) {
-    var sliderPosition by remember { mutableStateOf(0F) }
+//    var sliderPosition by remember { mutableStateOf(0F) }
+
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+    val songViewModel : SongViewModel = viewModel(factory = SongViewModelFactory(LocalContext.current))
+    val playerState by mainViewModel.playbackState.observeAsState()
+    val currentPosition = playerState?.position
+
+    println("POSITION: $currentPosition")
+    var sliderIsChanging by remember { mutableStateOf(false) }
+
+    var localSliderValue by remember { mutableStateOf(0f) }
+//
+//    val sliderProgress =
+//        if (sliderIsChanging) localSliderValue else songViewModel.currentPlayerPosition
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -92,8 +109,15 @@ fun PlayerSlider(seconds: String) {
             .padding(start = 24.dp, end = 24.dp, bottom = 12.dp)
     ) {
         Slider(
-            value = sliderPosition,
-            onValueChange = { sliderPosition = it },
+            value = currentPosition?.toFloat() ?: 0F,
+            onValueChange = { newPosition ->
+                localSliderValue = newPosition
+                sliderIsChanging = true
+            },
+//            onValueChangeFinished = {
+//                mainViewModel.seekTo(songViewModel.currentSongDuration * localSliderValue)
+//                sliderIsChanging = false
+//            },
             colors = SliderDefaults.colors(
                 thumbColor = Color.White,
                 activeTrackColor = Color.White
@@ -106,5 +130,8 @@ fun PlayerSlider(seconds: String) {
             Spacer(modifier = Modifier.weight(1f))
             Text(text = Time.convertSeconds(seconds), color = Color.White)
         }
+    }
+    LaunchedEffect("playbackPosition") {
+        songViewModel.updateCurrentPlaybackPosition()
     }
 }

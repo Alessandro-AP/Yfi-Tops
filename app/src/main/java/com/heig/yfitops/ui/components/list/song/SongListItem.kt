@@ -14,13 +14,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.heig.yfitops.MyApp
 import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun SongListItem(song: Song) {
-    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
 
     Row(
         Modifier

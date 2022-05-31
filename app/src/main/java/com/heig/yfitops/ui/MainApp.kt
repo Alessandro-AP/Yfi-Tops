@@ -14,14 +14,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.heig.yfitops.MyApp
 import com.heig.yfitops.ui.bottomsheet.collapsed.SheetCollapsed
 import com.heig.yfitops.ui.bottomsheet.currentFraction
 import com.heig.yfitops.ui.bottomsheet.expanded.SheetExpanded
 import com.heig.yfitops.ui.navigation.Navigation
 import com.heig.yfitops.ui.theme.YfiTopsTheme
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 import com.heig.yfitops.viewmodels.PlaylistViewModel
+import com.heig.yfitops.viewmodels.PlaylistViewModelFactory
 import kotlinx.coroutines.launch
 
 
@@ -44,7 +49,8 @@ class MainApp : ComponentActivity() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen(playlistViewModel: PlaylistViewModel = viewModel()) {
+fun HomeScreen() {
+    val playlistViewModel : PlaylistViewModel = viewModel(factory = PlaylistViewModelFactory(LocalContext.current.applicationContext as MyApp))
     val list by playlistViewModel.playlists.observeAsState(null)
     val scope = rememberCoroutineScope()
 

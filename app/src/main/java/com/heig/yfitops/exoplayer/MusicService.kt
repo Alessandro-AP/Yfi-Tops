@@ -8,6 +8,7 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
+import androidx.lifecycle.Observer
 import androidx.media.MediaBrowserServiceCompat
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
@@ -16,10 +17,13 @@ import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import com.google.android.exoplayer2.upstream.DefaultDataSource
+import com.heig.yfitops.MyApp
+import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.domain.services.FirebaseRepository
 import com.heig.yfitops.exoplayer.callbacks.MusicNotificationListener
 import com.heig.yfitops.exoplayer.callbacks.MusicPlaybackPreparer
 import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
+import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.*
 
 class MusicService : MediaBrowserServiceCompat() {
@@ -45,9 +49,25 @@ class MusicService : MediaBrowserServiceCompat() {
 
     override fun onCreate() {
         super.onCreate()
-         serviceScope.launch {
-             musicSource.convertFormat(FirebaseRepository.getSongsByPlaylistID("QVHDkuU1bY9fuXTTyMzA"))
-         }
+        val observer = Observer<Resource<List<Song>>> { songs -> //Live data value has changed
+
+            songs.data?.let { musicSource.convertFormat(it) }
+            exoPlayer.stop()
+            exoPlayer.clearMediaItems()
+            exoPlayer.setMediaSource(musicSource.asMediaSource(dataSourceFactory))
+
+            musicNotificationManager = MusicNotificationManager(
+                this,
+                mediaSession.sessionToken,
+                MusicNotificationListener(this)
+            ) {
+                curSongDuration = exoPlayer.duration
+            }
+
+            musicNotificationManager.showNotification(exoPlayer)
+        }
+
+        (application as MyApp).repository.currentSongs.observeForever(observer)
 
         dataSourceFactory = DefaultDataSource.Factory(applicationContext)
 
@@ -60,6 +80,9 @@ class MusicService : MediaBrowserServiceCompat() {
             )
             setHandleAudioBecomingNoisy(true)
         }
+
+        musicPlayerListener = MusicPlayerListener(this)
+        exoPlayer.addListener(musicPlayerListener)
 
         // Notification click triggers our activity
         val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
@@ -78,14 +101,6 @@ class MusicService : MediaBrowserServiceCompat() {
         // Service token (from MediaBrowserServiceCompat)
         sessionToken = mediaSession.sessionToken
 
-        musicNotificationManager = MusicNotificationManager(
-            this,
-            mediaSession.sessionToken,
-            MusicNotificationListener(this)
-        ) {
-            curSongDuration = exoPlayer.duration
-        }
-
         val musicPlaybackPreparer = MusicPlaybackPreparer(musicSource) {
             curPlayingSong = it
             preparePlayer(musicSource.playlist, it, true)
@@ -95,11 +110,6 @@ class MusicService : MediaBrowserServiceCompat() {
         mediaSessionConnector.setPlaybackPreparer(musicPlaybackPreparer)
         mediaSessionConnector.setQueueNavigator(MusicQueueNavigator())
         mediaSessionConnector.setPlayer(exoPlayer)
-
-        musicPlayerListener = MusicPlayerListener(this)
-        exoPlayer.addListener(musicPlayerListener)
-
-        musicNotificationManager.showNotification(exoPlayer)
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
