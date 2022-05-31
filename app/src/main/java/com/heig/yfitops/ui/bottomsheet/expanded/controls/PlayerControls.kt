@@ -42,7 +42,7 @@ fun PlayerControls() {
             )
         }
 
-        PlayPauseButton(onClick = { /*TODO*/ })
+        PlayPauseButton(onClick = {mainViewModel.startStop()})
 
         IconButton(
             onClick = { mainViewModel.skipToNextSong() },

@@ -24,7 +24,6 @@ import kotlinx.coroutines.*
 
 class MusicService : MediaBrowserServiceCompat() {
 
-//    lateinit var dataSourceFactory: DefaultDataSourceFactory
     lateinit var dataSourceFactory: DefaultDataSource.Factory
     private val musicSource = MusicSource()
     private lateinit var musicPlayerListener: MusicPlayerListener
@@ -46,9 +45,8 @@ class MusicService : MediaBrowserServiceCompat() {
 
     override fun onCreate() {
         super.onCreate()
-
          serviceScope.launch {
-             musicSource.convertFormat(FirebaseRepository.getSongsByPlaylistID("LXukNF71GDvShLD2bJyG"))
+             musicSource.convertFormat(FirebaseRepository.getSongsByPlaylistID("QVHDkuU1bY9fuXTTyMzA"))
          }
 
         dataSourceFactory = DefaultDataSource.Factory(applicationContext)

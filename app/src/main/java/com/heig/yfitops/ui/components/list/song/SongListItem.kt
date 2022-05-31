@@ -26,7 +26,7 @@ fun SongListItem(song: Song) {
         Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { /*TODO*/ mainViewModel.playOrToggleSong(song) }) {
+            .clickable {  mainViewModel.playSong(song) }) {
         AsyncImage(
             model = song.imageUrl,
             contentDescription = null,

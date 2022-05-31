@@ -12,11 +12,11 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.ui.navigation.Screen
-import com.heig.yfitops.viewmodels.SongViewModel
+//import com.heig.yfitops.viewmodels.SongViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun PlaylistGridItem(navController: NavController, playlist: Playlist, songViewModel: SongViewModel = viewModel()){
+fun PlaylistGridItem(navController: NavController, playlist: Playlist){
 
     fun navigateToSongScreen(){
         navController.navigate(Screen.SongScreen.withArgs(playlist.id))

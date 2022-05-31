@@ -42,7 +42,7 @@ fun CircleIconButtonLarge(
             .clickable(
                 indication = rememberRipple(bounded = true),
                 interactionSource = remember { MutableInteractionSource() },
-                onClick = { playerState = !playerState }
+                onClick = { playerState = !playerState; onClick() }
             )
     ) {
         Icon(

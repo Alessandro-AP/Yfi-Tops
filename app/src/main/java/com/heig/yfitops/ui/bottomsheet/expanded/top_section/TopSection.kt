@@ -1,10 +1,12 @@
 package com.heig.yfitops.ui.bottomsheet.expanded.top_section
 
+import android.support.v4.media.MediaMetadataCompat
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,12 +16,18 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.heig.yfitops.R
+import com.heig.yfitops.exoplayer.toSong
 import com.heig.yfitops.utils.Time
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
-fun TopSection(title: String) {
+fun TopSection() {
+
+    val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+    val currentSongMetadata  : MediaMetadataCompat? by mainViewModel.curPlayingSong.observeAsState()
+    val currentSong = currentSongMetadata?.toSong()
+
     val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -27,7 +35,7 @@ fun TopSection(title: String) {
     ) {
 
         Image(
-            painter = rememberAsyncImagePainter("https://e-cdn-images.dzcdn.net/images/cover/614af5cb69dd52e4de82dd2cd9e217c9/264x264-000000-80-0-0.jpg"),
+            painter = rememberAsyncImagePainter(currentSong?.imageUrl ),
             contentDescription = "Song Image",
             modifier = Modifier
                 .size(420.dp)
@@ -37,15 +45,15 @@ fun TopSection(title: String) {
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
             Column(modifier = Modifier.padding(start = 32.dp))
             {
+                    Text(
+                        modifier = Modifier
+                            .padding(bottom = 3.dp),
+                        text = currentSong?.title ?: "song_name",
+                        color = Color.White,
+                        style = MaterialTheme.typography.h6
+                    )
                 Text(
-                    modifier = Modifier
-                        .padding(bottom = 3.dp),
-                    text = "I Kissed a Girl",
-                    color = Color.White,
-                    style = MaterialTheme.typography.h6
-                )
-                Text(
-                    text = "Lady Gaga",
+                    text = currentSong?.artist ?: "artist",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2
                 )

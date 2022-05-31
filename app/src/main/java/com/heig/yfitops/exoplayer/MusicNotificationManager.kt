@@ -3,10 +3,7 @@ package com.heig.yfitops.exoplayer
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.graphics.drawable.Drawable
-import android.provider.MediaStore
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import com.bumptech.glide.Glide
@@ -15,10 +12,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.heig.yfitops.R
-import java.io.IOException
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MusicNotificationManager(
@@ -66,36 +59,11 @@ class MusicNotificationManager(
             return mediaController.metadata.description.subtitle.toString()
         }
 
-        fun getBitmapFromURL(src: String?): Bitmap? {
-            return try {
-                val url = URL(src)
-                val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
-                connection.setDoInput(true)
-                connection.connect()
-                val input: InputStream = connection.getInputStream()
-                BitmapFactory.decodeStream(input)
-            } catch (e: IOException) {
-                // Log exception
-                null
-            }
-        }
 
         override fun getCurrentLargeIcon(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? {
-//            getBitmapFromURL(mediaController.metadata.description.iconUri.toString())
-//            if (android.os.Build.VERSION.SDK_INT >= 29){
-//                mediaController.metadata.description.iconUri?.let {
-//                    ImageDecoder.createSource(context.contentResolver, it)
-//                }?.let { ImageDecoder.decodeBitmap(it) }
-//            }
-//            else{
-//                // Use older version
-//                MediaStore.Images.Media.getBitmap(context.contentResolver, mediaController.metadata.description.iconUri)
-//            }
-
-            // TODO adapt
             Glide.with(context).asBitmap()
                 .load(mediaController.metadata.description.iconUri)
                 .into(object : CustomTarget<Bitmap>() {
@@ -109,15 +77,6 @@ class MusicNotificationManager(
                     override fun onLoadCleared(placeholder: Drawable?) = Unit
                 })
             return null
-            // autre exemple trouvé
-//            val window = player.currentMediaItemIndex
-//            val largeIcon: Bitmap = getLargeIcon(window)
-//            if (largeIcon == null && getLargeIconUri(window) != null) {
-//                // load bitmap async
-//                loadBitmap(getLargeIconUri(window), callback)
-//                return getPlaceholderBitmap()
-//            }
-//            return largeIcon
         }
     }
 

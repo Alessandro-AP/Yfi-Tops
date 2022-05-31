@@ -79,8 +79,7 @@ fun HomeScreen(playlistViewModel: PlaylistViewModel = viewModel()) {
                 SheetCollapsed(
                     isCollapsed = scaffoldState.bottomSheetState.isCollapsed,
                     currentFraction = scaffoldState.currentFraction,
-                    onSheetClick = sheetToggle,
-                    name = title
+                    onSheetClick = sheetToggle
                 )
             }
         },

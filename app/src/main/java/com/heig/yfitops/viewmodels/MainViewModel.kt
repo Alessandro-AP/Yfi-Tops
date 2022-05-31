@@ -1,10 +1,7 @@
 package com.heig.yfitops.viewmodels
 
-import android.app.Application
-import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_MEDIA_ID
 import android.content.Context
-import android.support.v4.media.session.PlaybackStateCompat
+import android.support.v4.media.MediaBrowserCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,13 +16,14 @@ import com.heig.yfitops.utils.Resource
 class MainViewModel(
     context: Context
 ) : ViewModel() {
+
     private val _mediaItems = MutableLiveData<Resource<List<Song>>>()
     val mediaItems: LiveData<Resource<List<Song>>> = _mediaItems
 
     private val musicServiceConnection: MusicServiceConnection = MusicServiceConnection(context)
 
-    val isConnected = musicServiceConnection.isConnected
-    val networkError = musicServiceConnection.networkError
+//    val isConnected = musicServiceConnection.isConnected
+//    val networkError = musicServiceConnection.networkError
     val curPlayingSong = musicServiceConnection.curPlayingSong
     val playbackState = musicServiceConnection.playbackState
 
@@ -63,20 +61,19 @@ class MainViewModel(
         musicServiceConnection.transportControls.seekTo(pos)
     }
 
-    fun playOrToggleSong(mediaItem: Song, toggle: Boolean = false) {
-        val isPrepared = playbackState.value?.isPrepared ?: false
-        if(isPrepared && mediaItem.id ==
-            curPlayingSong.value?.getString(METADATA_KEY_MEDIA_ID)) {
-            playbackState.value?.let { playbackState ->
-                when {
-                    playbackState.isPlaying -> if(toggle) musicServiceConnection.transportControls.pause()
-                    playbackState.isPlayEnabled -> musicServiceConnection.transportControls.play()
-                    else -> Unit
-                }
+    fun startStop(){
+        playbackState.value?.let { playbackState ->
+            when {
+                playbackState.isPlaying ->  musicServiceConnection.transportControls.pause()
+                playbackState.isPlayEnabled -> musicServiceConnection.transportControls.play()
+                else -> Unit
             }
-        } else {
-            musicServiceConnection.transportControls.playFromMediaId(mediaItem.id, null)
         }
+    }
+    fun playSong(mediaItem: Song) {
+        val isPrepared = playbackState.value?.isPrepared ?: false
+        if(isPrepared)
+            musicServiceConnection.transportControls.playFromMediaId(mediaItem.id, null)
     }
 
     override fun onCleared() {

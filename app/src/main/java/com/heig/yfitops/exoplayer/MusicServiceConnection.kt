@@ -17,10 +17,10 @@ class MusicServiceConnection(
     context: Context
 ) {
     private val _isConnected = MutableLiveData<Event<Resource<Boolean>>>()
-    val isConnected: LiveData<Event<Resource<Boolean>>> = _isConnected
+//    val isConnected: LiveData<Event<Resource<Boolean>>> = _isConnected
 
     private val _networkError = MutableLiveData<Event<Resource<Boolean>>>()
-    val networkError: LiveData<Event<Resource<Boolean>>> = _networkError
+//    val networkError: LiveData<Event<Resource<Boolean>>> = _networkError
 
     private val _playbackState = MutableLiveData<PlaybackStateCompat?>()
     val playbackState: LiveData<PlaybackStateCompat?> = _playbackState

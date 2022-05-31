@@ -26,7 +26,7 @@ fun SheetExpanded(
                 modifier = Modifier
                     .padding(top = 40.dp)
             ) {
-                TopSection(title = name)
+                TopSection()
             }
             Box(
                 contentAlignment = Alignment.Center

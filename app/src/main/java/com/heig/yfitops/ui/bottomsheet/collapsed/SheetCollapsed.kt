@@ -1,5 +1,6 @@
 package com.heig.yfitops.ui.bottomsheet.collapsed
 
+import android.support.v4.media.MediaMetadataCompat
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,6 +9,8 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +21,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.R
+import com.heig.yfitops.domain.models.Song
+import com.heig.yfitops.exoplayer.toSong
 import com.heig.yfitops.ui.bottomsheet.collapsed.modifier.noRippleClickable
 import com.heig.yfitops.ui.theme.bottomSheetThemeDark
 import com.heig.yfitops.viewmodels.MainViewModel
@@ -25,13 +30,14 @@ import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
 fun SheetCollapsed(
-    name: String,
     isCollapsed: Boolean,
     currentFraction: Float,
     onSheetClick: () -> Unit
 ) {
     val context = LocalContext.current
     val mainViewModel : MainViewModel = viewModel(factory = MainViewModelFactory(LocalContext.current))
+    val currentSongMetadata  : MediaMetadataCompat? by mainViewModel.curPlayingSong.observeAsState()
+    val currentSong = currentSongMetadata?.toSong()
 
     Row(
         modifier = Modifier
@@ -47,7 +53,7 @@ fun SheetCollapsed(
     ) {
 
         IconButton(
-            onClick = { },
+            onClick = { mainViewModel.startStop() },
             modifier = Modifier
                 .padding(start = 8.dp, top = 8.dp, bottom = 8.dp, end = 8.dp)
         ) {
@@ -58,18 +64,16 @@ fun SheetCollapsed(
                 contentDescription = "Play Pause"
             )
         }
-
-        Text(
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 16.dp),
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            text = name,
-            color = Color.White,
-            style = MaterialTheme.typography.caption
-        )
-
+            Text(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 16.dp),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                text =  currentSong?.title ?: "song_name",
+                color = Color.White,
+                style = MaterialTheme.typography.caption
+            )
         IconButton(
             onClick = {
                 Toast.makeText(
