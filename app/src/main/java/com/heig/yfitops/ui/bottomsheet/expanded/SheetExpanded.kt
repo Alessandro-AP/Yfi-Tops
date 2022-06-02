@@ -17,10 +17,9 @@ import com.heig.yfitops.ui.theme.bottomSheetThemeDark
 fun SheetExpanded() {
     Surface(
         color = bottomSheetThemeDark,
-        modifier = Modifier.padding(top = 16.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize().padding(top = 16.dp)
         ) {
             Box(
                 contentAlignment = Alignment.Center,

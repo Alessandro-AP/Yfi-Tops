@@ -45,7 +45,7 @@ fun SongListItem(song: Song) {
         ) {
             Text(
                 text = song.title,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.body2
             )
         }
     }

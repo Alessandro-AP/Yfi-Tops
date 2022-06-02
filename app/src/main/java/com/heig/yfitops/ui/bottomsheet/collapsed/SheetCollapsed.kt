@@ -49,7 +49,6 @@ fun SheetCollapsed(
         modifier = Modifier
             .fillMaxWidth()
             .height(72.dp)
-            .background(bottomSheetThemeDark)
             .graphicsLayer(alpha = 1f - (currentFraction * 3.5f)) // Hide collapsed on scrolling
             .noRippleClickable(
                 onClick = onSheetClick,
@@ -77,7 +76,7 @@ fun SheetCollapsed(
                 .padding(start = 16.dp),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            text = currentSong?.title ?: "song_name",
+            text = currentSong?.title ?: "",
             color = Color.White,
             style = MaterialTheme.typography.caption
         )

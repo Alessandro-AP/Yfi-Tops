@@ -54,12 +54,12 @@ fun TopSection() {
                 Text(
                     modifier = Modifier
                         .padding(bottom = 3.dp),
-                    text = currentSong?.title ?: "song_name",
+                    text = currentSong?.title ?: "",
                     color = Color.White,
                     style = MaterialTheme.typography.h6
                 )
                 Text(
-                    text = currentSong?.artist ?: "artist",
+                    text = currentSong?.artist ?: "",
                     color = Color.White,
                     style = MaterialTheme.typography.subtitle2
                 )

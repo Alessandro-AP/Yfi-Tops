@@ -67,7 +67,6 @@ fun HomeScreen() {
         }
     }
 
-    val title = "I Kissed a Girl"
     val radius = (30 * scaffoldState.currentFraction).dp
 
     BottomSheetScaffold(
