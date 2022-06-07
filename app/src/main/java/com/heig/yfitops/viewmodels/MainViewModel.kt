@@ -12,7 +12,10 @@ import com.heig.yfitops.exoplayer.isPlayEnabled
 import com.heig.yfitops.exoplayer.isPlaying
 import com.heig.yfitops.utils.Resource
 
-
+/**
+ * This viewmodel handles the current playlist and
+ * has some methods for changing the state of the player
+ */
 class MainViewModel(application: Application) : ViewModel() {
 
     private val firebaseRepo = (application as MyApp).repository
@@ -23,10 +26,6 @@ class MainViewModel(application: Application) : ViewModel() {
     private val _hideBottomSheet = MutableLiveData(true)
     val hideBottomSheet : LiveData<Boolean> = _hideBottomSheet
 
-    fun showBottomSheet(){
-        if(_hideBottomSheet.value != false)
-            _hideBottomSheet.postValue(false)
-    }
 
     private val musicServiceConnection: MusicServiceConnection =
         MusicServiceConnection(application.applicationContext)
@@ -39,6 +38,11 @@ class MainViewModel(application: Application) : ViewModel() {
             val songs = Resource.success(firebaseRepo.getSongsByPlaylistID(id))
             firebaseRepo.updatePlaylist(id, songs)
         }
+    }
+
+    fun showBottomSheet(){
+        if(_hideBottomSheet.value != false)
+            _hideBottomSheet.postValue(false)
     }
 
     fun skipToNextSong() {

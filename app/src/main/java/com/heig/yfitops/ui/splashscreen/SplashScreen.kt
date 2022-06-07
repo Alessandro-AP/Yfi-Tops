@@ -19,6 +19,10 @@ import com.heig.yfitops.ui.navigation.Screen
 
 import kotlinx.coroutines.delay
 
+/**
+ * A splash screen is shown when the app is launched,
+ * it is used to show the app's logo and we added it because it looks cool.
+ */
 @Composable
 fun SplashScreen(navController: NavController){
     val scale = remember {

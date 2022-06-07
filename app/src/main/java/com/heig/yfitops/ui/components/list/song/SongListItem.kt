@@ -17,7 +17,6 @@ import com.heig.yfitops.viewmodels.MainViewModel
 
 @Composable
 fun SongListItem(song: Song, mainViewModel: MainViewModel) {
-
     Row(
         Modifier
             .fillMaxWidth()

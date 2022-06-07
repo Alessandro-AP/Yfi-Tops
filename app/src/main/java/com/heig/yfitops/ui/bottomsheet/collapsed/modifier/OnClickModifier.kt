@@ -6,6 +6,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 
+/**
+ * This modifier allows the bottomsheet to be opened on click when it is collapsed.
+ */
 fun Modifier.noRippleClickable(
     enabled: Boolean = true,
     onClick: () -> Unit

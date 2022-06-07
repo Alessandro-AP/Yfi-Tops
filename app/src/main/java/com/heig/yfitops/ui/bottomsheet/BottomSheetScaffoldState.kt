@@ -6,7 +6,7 @@ import androidx.compose.material.BottomSheetValue.Expanded
 import androidx.compose.material.ExperimentalMaterialApi
 
 /**
- * Align fraction states into single value
+ * BottomSheetScaffold state
  *
  *  1.0f - Expanded
  *  0.0f - Collapsed

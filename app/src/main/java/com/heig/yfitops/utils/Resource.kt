@@ -1,5 +1,9 @@
 package com.heig.yfitops.utils
 
+/**
+ * This class is a object wrapper used for handling
+ * success data and error callback responses from an API
+ */
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 
     companion object {

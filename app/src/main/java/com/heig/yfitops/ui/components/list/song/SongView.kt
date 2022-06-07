@@ -9,9 +9,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * Representing the View of the Song List
+ */
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun SongListView(playlistID: String , mainViewModel: MainViewModel) {
+fun SongView(playlistID: String, mainViewModel: MainViewModel) {
 
     CoroutineScope(Dispatchers.IO).launch {
         mainViewModel.updatePlaylist(playlistID)

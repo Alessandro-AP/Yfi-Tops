@@ -27,6 +27,9 @@ import com.heig.yfitops.ui.bottomsheet.collapsed.modifier.noRippleClickable
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 
+/**
+ * This component contains the player in its collapsed form.
+ */
 @Composable
 fun SheetCollapsed(
     isCollapsed: Boolean,

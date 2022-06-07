@@ -12,6 +12,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.heig.yfitops.domain.models.Playlist
 
+/**
+ * Representing the View of the Playlist Grid
+ */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlaylistView(navController: NavController, playlists: List<Playlist>) {

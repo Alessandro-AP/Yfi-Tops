@@ -30,7 +30,9 @@ import com.heig.yfitops.viewmodels.PlaylistViewModel
 import com.heig.yfitops.viewmodels.PlaylistViewModelFactory
 import kotlinx.coroutines.launch
 
-
+/**
+ * Main activity and entry point of the application
+ */
 class MainApp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +50,17 @@ class MainApp : ComponentActivity() {
     }
 }
 
-
+/**
+ * This function contains the heart of the entire layout, namely the BottomSheetScaffold,
+ * this component is like a classic Scaffold with the difference that it has a bar
+ * at the bottom which can be opened upwards.
+ *
+ * This component is composed of 3 main parts:
+ *  - Content: the content of the scaffold (the list of playlists and songs in our case)
+ *  - SheetCollapsed : the bottom bar when it is closed.
+ *  - SheetExpanded : the content of the bar when it is open.
+ *
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(mainViewModel: MainViewModel =
@@ -87,7 +99,7 @@ fun HomeScreen(mainViewModel: MainViewModel =
                 modifier = Modifier
                     .fillMaxHeight(fraction = 0.95f)
                     .fillMaxWidth()
-                    .alpha(if(!isHidden) 1f else 0f) //hide with livedata
+                    .alpha(if(!isHidden) 1f else 0f)
             ) {
                     SheetExpanded()
                     SheetCollapsed(

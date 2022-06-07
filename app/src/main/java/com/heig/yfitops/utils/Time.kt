@@ -5,8 +5,11 @@ import java.util.Locale
 
 
 object Time {
-    fun convertToMMSS(value: Long): String {
+    /**
+     * Method used to convert seconds from Long into a String with the format mm:ss
+     */
+    fun convertToMMSS(seconds: Long): String {
         val dateFormat = SimpleDateFormat("mm:ss", Locale.getDefault())
-        return dateFormat.format(value)
+        return dateFormat.format(seconds)
     }
 }

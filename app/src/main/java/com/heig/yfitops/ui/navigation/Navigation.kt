@@ -8,10 +8,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.ui.components.list.playlist.PlaylistView
-import com.heig.yfitops.ui.components.list.song.SongListView
+import com.heig.yfitops.ui.components.list.song.SongView
 import com.heig.yfitops.ui.splashscreen.SplashScreen
 import com.heig.yfitops.viewmodels.MainViewModel
 
+/**
+ * Navigation Controller
+ * Defines a set of components that will be rendered according to the route provided.
+ */
 @Composable
 fun Navigation(list: List<Playlist>, mainViewModel: MainViewModel) {
     val navController = rememberNavController()
@@ -30,7 +34,7 @@ fun Navigation(list: List<Playlist>, mainViewModel: MainViewModel) {
             })
         ) { entry ->
             entry.arguments?.getString("playlistID")
-                ?.let { SongListView(playlistID = it, mainViewModel) }
+                ?.let { SongView(playlistID = it, mainViewModel) }
         }
     }
 }
