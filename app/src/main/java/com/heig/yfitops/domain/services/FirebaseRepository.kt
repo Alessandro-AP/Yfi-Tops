@@ -1,7 +1,6 @@
 package com.heig.yfitops.domain.services
 
 import android.util.Log
-import androidx.compose.ui.text.capitalize
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentReference
@@ -14,7 +13,6 @@ import com.heig.yfitops.utils.Constants.FIRESTORE_PLAYLIST_COLLECTION
 import com.heig.yfitops.utils.Constants.PLAYLIST_SONGS
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.tasks.await
-import java.util.*
 
 
 class FirebaseRepository {

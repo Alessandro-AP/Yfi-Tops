@@ -1,6 +1,7 @@
 package com.heig.yfitops.ui.navigation
 
 sealed class Screen(val route : String){
+    object SplashScreen : Screen("splash_screen")
     object PlaylistScreen : Screen("playlist_screen")
     object SongScreen : Screen("song_screen")
 

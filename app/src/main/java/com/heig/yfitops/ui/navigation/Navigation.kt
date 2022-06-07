@@ -9,11 +9,17 @@ import androidx.navigation.navArgument
 import com.heig.yfitops.domain.models.Playlist
 import com.heig.yfitops.ui.components.list.playlist.PlaylistView
 import com.heig.yfitops.ui.components.list.song.SongListView
+import com.heig.yfitops.ui.splashscreen.SplashScreen
+import com.heig.yfitops.viewmodels.MainViewModel
 
 @Composable
-fun Navigation(list: List<Playlist>) {
+fun Navigation(list: List<Playlist>, mainViewModel: MainViewModel) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.PlaylistScreen.route) {
+
+    NavHost(navController = navController, startDestination = Screen.SplashScreen.route) {
+        composable(Screen.SplashScreen.route) {
+            SplashScreen(navController = navController)
+        }
         composable(route = Screen.PlaylistScreen.route) {
             PlaylistView(navController = navController, playlists = list)
         }
@@ -24,8 +30,7 @@ fun Navigation(list: List<Playlist>) {
             })
         ) { entry ->
             entry.arguments?.getString("playlistID")
-                ?.let { SongListView(playlistID = it) }
+                ?.let { SongListView(playlistID = it, mainViewModel) }
         }
-
     }
 }

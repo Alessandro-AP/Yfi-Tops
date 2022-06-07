@@ -10,25 +10,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.heig.yfitops.MyApp
 import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.viewmodels.MainViewModel
-import com.heig.yfitops.viewmodels.MainViewModelFactory
 
 @Composable
-fun SongListItem(song: Song) {
-    val mainViewModel: MainViewModel =
-        viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp))
+fun SongListItem(song: Song, mainViewModel: MainViewModel) {
 
     Row(
         Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { mainViewModel.playSong(song) }) {
+            .clickable {
+                mainViewModel.playSong(song)
+                mainViewModel.showBottomSheet()
+            }) {
         AsyncImage(
             model = song.imageUrl,
             contentDescription = null,

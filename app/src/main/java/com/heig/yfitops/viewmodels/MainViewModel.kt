@@ -3,6 +3,7 @@ package com.heig.yfitops.viewmodels
 import android.app.Application
 import android.support.v4.media.MediaMetadataCompat
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.domain.models.Song
@@ -19,11 +20,12 @@ class MainViewModel(application: Application) : ViewModel() {
     private val _mediaItems = firebaseRepo.currentSongs
     val mediaItems: LiveData<Resource<List<Song>>> = _mediaItems
 
-    suspend fun updatePlaylist(id: String) {
-        if (id != firebaseRepo.currentPlaylist.value) {
-            val songs = Resource.success(firebaseRepo.getSongsByPlaylistID(id))
-            firebaseRepo.updatePlaylist(id, songs)
-        }
+    private val _hideBottomSheet = MutableLiveData(true)
+    val hideBottomSheet : LiveData<Boolean> = _hideBottomSheet
+
+    fun showBottomSheet(){
+        if(_hideBottomSheet.value != false)
+            _hideBottomSheet.postValue(false)
     }
 
     private val musicServiceConnection: MusicServiceConnection =
@@ -32,6 +34,12 @@ class MainViewModel(application: Application) : ViewModel() {
     val curPlayingSong = musicServiceConnection.curPlayingSong
     val playbackState = musicServiceConnection.playbackState
 
+    suspend fun updatePlaylist(id: String) {
+        if (id != firebaseRepo.currentPlaylist.value) {
+            val songs = Resource.success(firebaseRepo.getSongsByPlaylistID(id))
+            firebaseRepo.updatePlaylist(id, songs)
+        }
+    }
 
     fun skipToNextSong() {
         musicServiceConnection.transportControls.skipToNext()

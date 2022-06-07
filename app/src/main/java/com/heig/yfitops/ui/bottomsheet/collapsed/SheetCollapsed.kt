@@ -2,7 +2,6 @@ package com.heig.yfitops.ui.bottomsheet.collapsed
 
 import android.support.v4.media.MediaMetadataCompat
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -25,7 +24,6 @@ import com.heig.yfitops.R
 import com.heig.yfitops.exoplayer.isPlaying
 import com.heig.yfitops.exoplayer.toSong
 import com.heig.yfitops.ui.bottomsheet.collapsed.modifier.noRippleClickable
-import com.heig.yfitops.ui.theme.bottomSheetThemeDark
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory
 

@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,6 +24,8 @@ import com.heig.yfitops.ui.bottomsheet.currentFraction
 import com.heig.yfitops.ui.bottomsheet.expanded.SheetExpanded
 import com.heig.yfitops.ui.navigation.Navigation
 import com.heig.yfitops.ui.theme.YfiTopsTheme
+import com.heig.yfitops.viewmodels.MainViewModel
+import com.heig.yfitops.viewmodels.MainViewModelFactory
 import com.heig.yfitops.viewmodels.PlaylistViewModel
 import com.heig.yfitops.viewmodels.PlaylistViewModelFactory
 import kotlinx.coroutines.launch
@@ -37,6 +40,7 @@ class MainApp : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+
                     HomeScreen()
                 }
             }
@@ -47,10 +51,14 @@ class MainApp : ComponentActivity() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen() {
-    val playlistViewModel: PlaylistViewModel =
-        viewModel(factory = PlaylistViewModelFactory(LocalContext.current.applicationContext as MyApp))
+fun HomeScreen(mainViewModel: MainViewModel =
+                   viewModel(factory = MainViewModelFactory(LocalContext.current.applicationContext as MyApp)),
+               playlistViewModel: PlaylistViewModel =
+                   viewModel(factory = PlaylistViewModelFactory(LocalContext.current.applicationContext as MyApp))) {
+
     val list by playlistViewModel.playlists.observeAsState(null)
+    val isHidden by mainViewModel.hideBottomSheet.observeAsState(true)
+
     val scope = rememberCoroutineScope()
 
     val scaffoldState = rememberBottomSheetScaffoldState(
@@ -73,22 +81,23 @@ fun HomeScreen() {
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
         sheetShape = RoundedCornerShape(topStart = radius, topEnd = radius),
-        sheetContent = {
+        sheetPeekHeight = if(!isHidden) {72.dp} else {0.dp},
+            sheetContent = {
             Box(
                 modifier = Modifier
                     .fillMaxHeight(fraction = 0.95f)
                     .fillMaxWidth()
+                    .alpha(if(!isHidden) 1f else 0f) //hide with livedata
             ) {
-                SheetExpanded()
-                SheetCollapsed(
-                    isCollapsed = scaffoldState.bottomSheetState.isCollapsed,
-                    currentFraction = scaffoldState.currentFraction,
-                    onSheetClick = sheetToggle
-                )
+                    SheetExpanded()
+                    SheetCollapsed(
+                        isCollapsed = scaffoldState.bottomSheetState.isCollapsed,
+                        currentFraction = scaffoldState.currentFraction,
+                        onSheetClick = sheetToggle
+                    )
             }
         },
-        sheetPeekHeight = 72.dp
     ) {
-        list?.let { Navigation(list = it) }
+        list?.let { Navigation(list = it, mainViewModel) }
     }
 }
