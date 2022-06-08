@@ -12,11 +12,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.heig.yfitops.utils.Resource
 
+/**
+ * This class allows communication between
+ * activity/components and the music service.
+ */
 class MusicServiceConnection(
     context: Context
 ) {
     private val _isConnected = MutableLiveData<Resource<Boolean>>()
-    private val _networkError = MutableLiveData<Resource<Boolean>>()
 
     private val _playbackState = MutableLiveData<PlaybackStateCompat?>()
     val playbackState: LiveData<PlaybackStateCompat?> = _playbackState
@@ -41,6 +44,10 @@ class MusicServiceConnection(
     val transportControls: MediaControllerCompat.TransportControls
         get() = mediaController.transportControls
 
+    /**
+     * This class contains a series of methods related to exoplayer that
+     * will automatically be called when the corresponding event occurs.
+     */
     private inner class MediaBrowserConnectionCallback(
         private val context: Context
     ) : MediaBrowserCompat.ConnectionCallback() {
@@ -74,6 +81,10 @@ class MusicServiceConnection(
         }
     }
 
+    /**
+     * This class contains a series of methods related to exoplayer that
+     * will automatically be called when the corresponding event occurs.
+     */
     private inner class MediaControllerCallback : MediaControllerCompat.Callback() {
 
         override fun onPlaybackStateChanged(state: PlaybackStateCompat?) {
@@ -82,18 +93,6 @@ class MusicServiceConnection(
 
         override fun onMetadataChanged(metadata: MediaMetadataCompat?) {
             _curPlayingSong.postValue(metadata)
-        }
-
-        override fun onSessionEvent(event: String?, extras: Bundle?) {
-            super.onSessionEvent(event, extras)
-            when(event) {
-                "NETWORK_ERROR" -> _networkError.postValue(
-                        Resource.error(
-                            "Couldn't connect to the server. Please check your internet connection.",
-                            null
-                        )
-                    )
-            }
         }
 
         override fun onSessionDestroyed() {
