@@ -1,5 +1,8 @@
 package com.heig.yfitops.utils
 
+/**
+ * Constants for playlists and songs.
+ */
 object Constants {
 
     // Playlist Firebase Metadata
@@ -14,8 +17,4 @@ object Constants {
     const val SONG_ARTIST = "artist"
     const val SONG_TRACK_URL = "trackUrl"
     const val SONG_IMAGE_URL = "imageUrl"
-
-    const val MEDIA_ROOT_ID = "root_id"
-
-
 }

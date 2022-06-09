@@ -7,13 +7,18 @@ import com.heig.yfitops.utils.Constants.PLAYLIST_IMAGE_URL
 import com.heig.yfitops.utils.Constants.PLAYLIST_TITLE
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Playlist Entity.
+ */
 @Parcelize
 data class Playlist(
     val id: String,
     val title: String,
     val imageUrl: String
 ) : Parcelable {
+
     companion object {
+        // create an Entity from Firebase data
         fun DocumentSnapshot.toPlaylist(): Playlist? {
             return try {
                 Playlist(

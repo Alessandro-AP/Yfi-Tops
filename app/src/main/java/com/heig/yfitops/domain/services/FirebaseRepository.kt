@@ -14,7 +14,10 @@ import com.heig.yfitops.utils.Constants.PLAYLIST_SONGS
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.tasks.await
 
-
+/**
+ * Firebase repository fetching playlists and songs to the firestore.
+ * It also handles LiveData about the current song and playlist selected in the app.
+ */
 class FirebaseRepository {
     private val playlistCollection =
         FirebaseFirestore.getInstance().collection(FIRESTORE_PLAYLIST_COLLECTION)

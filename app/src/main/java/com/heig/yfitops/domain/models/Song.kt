@@ -9,6 +9,9 @@ import com.heig.yfitops.utils.Constants.SONG_TITLE
 import com.heig.yfitops.utils.Constants.SONG_TRACK_URL
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Song Entity.
+ */
 @Parcelize
 data class Song(
     val id: String,
@@ -17,7 +20,9 @@ data class Song(
     val trackUrl: String,
     val imageUrl: String,
 ) : Parcelable {
+
     companion object {
+        // create an Entity from Firebase data
         fun DocumentSnapshot.toSong(): Song? {
             return try {
                 Song(
