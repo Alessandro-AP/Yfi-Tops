@@ -5,6 +5,10 @@ import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.heig.yfitops.exoplayer.MusicService
 
+/**
+ * Listener for changes happening in the music player.
+ * Trigger the shutdown of the music service when needed.
+ */
 class MusicPlayerListener(
     private val musicService: MusicService
 ) : Player.Listener {

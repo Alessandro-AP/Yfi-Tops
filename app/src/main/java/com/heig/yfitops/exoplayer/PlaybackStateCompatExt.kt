@@ -4,6 +4,12 @@ import android.os.SystemClock
 import android.support.v4.media.session.PlaybackStateCompat
 import android.support.v4.media.session.PlaybackStateCompat.STATE_PLAYING
 
+/**
+ * Utilities to retrieve Playback state for a MediaSessionCompat.
+ * Retrieve information about the current playing state, the current playback position,
+ * and the current control capabilities.
+ */
+
 inline val PlaybackStateCompat.isPlaying
     get() = state == PlaybackStateCompat.STATE_BUFFERING ||
             state == PlaybackStateCompat.STATE_PLAYING

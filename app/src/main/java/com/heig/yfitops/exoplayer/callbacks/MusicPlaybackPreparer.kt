@@ -9,6 +9,9 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.heig.yfitops.exoplayer.MusicSource
 
+/**
+ * Class to which playback preparation and play actions are delegated.
+ */
 class MusicPlaybackPreparer(
     private val musicSource: MusicSource,
     private val playerPrepared: (MediaMetadataCompat?) -> Unit
@@ -24,6 +27,7 @@ class MusicPlaybackPreparer(
         playerPrepared(itemToPlay)
     }
 
+    // not needed in our context
     override fun onCommand(player: Player, command: String, extras: Bundle?, cb: ResultReceiver?) = false
     override fun onPrepare(playWhenReady: Boolean) = Unit
     override fun onPrepareFromSearch(query: String, playWhenReady: Boolean, extras: Bundle?) = Unit

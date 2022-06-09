@@ -3,6 +3,9 @@ package com.heig.yfitops.exoplayer
 import android.support.v4.media.MediaMetadataCompat
 import com.heig.yfitops.domain.models.Song
 
+/**
+ * Mapper class. Convert a MediaMetadataCompat to a Song entity.
+ */
 fun MediaMetadataCompat.toSong(): Song? {
     return description?.let {
         Song(

@@ -7,6 +7,10 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.heig.yfitops.exoplayer.MusicNotificationManager.Companion.NOTIFICATION_ID
 import com.heig.yfitops.exoplayer.MusicService
 
+/**
+ * Manage actions on the music player notification.
+ * Responsible for starting and stopping the music service.
+ */
 class MusicNotificationListener(private val musicService: MusicService) :
     PlayerNotificationManager.NotificationListener {
 

@@ -26,9 +26,18 @@ import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.*
 
+/**
+ * Music service managing the music player and the media source. It is responsible for :
+ * - initialize the music player and its parameters (music source, media session, listeners).
+ * - manage the modification of the media source (playlist changed by user) and
+ *   adapt the music player to the modification.
+ * - configure the music player notification.
+ * - clean resources on deletion.
+ */
 class MusicService : MediaBrowserServiceCompat() {
 
-    lateinit var dataSourceFactory: DefaultDataSource.Factory
+    // music player related variables
+    private lateinit var dataSourceFactory: DefaultDataSource.Factory
     private val musicSource = MusicSource()
     private lateinit var musicPlayerListener: MusicPlayerListener
     private lateinit var musicNotificationManager: MusicNotificationManager
@@ -42,9 +51,9 @@ class MusicService : MediaBrowserServiceCompat() {
     private lateinit var mediaSession: MediaSessionCompat
     private lateinit var mediaSessionConnector: MediaSessionConnector
 
+    // variables to monitor state of player & service
     var isForegroundService = false
     private var isPlayerInitialized = false
-
     private var curPlayingSong: MediaMetadataCompat? = null
 
     override fun onCreate() {
@@ -80,13 +89,12 @@ class MusicService : MediaBrowserServiceCompat() {
                     .build(), true
             )
             setHandleAudioBecomingNoisy(true)
-
         }
 
         musicPlayerListener = MusicPlayerListener(this)
         exoPlayer.addListener(musicPlayerListener)
 
-        // Notification click triggers our activity
+        // A click on the notification triggers our activity launch
         val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_MUTABLE)

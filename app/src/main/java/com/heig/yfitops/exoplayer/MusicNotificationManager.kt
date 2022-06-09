@@ -13,7 +13,9 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.heig.yfitops.R
 
-
+/**
+ * Configure and manage the music player in notification.
+ */
 class MusicNotificationManager(
     private val context: Context,
     sessionToken: MediaSessionCompat.Token,
@@ -44,6 +46,9 @@ class MusicNotificationManager(
         notificationManager.setPlayer(player)
     }
 
+    /**
+     * Provides information for the current media.
+     */
     private inner class DescriptionAdapter(
         private val mediaController: MediaControllerCompat
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
@@ -83,7 +88,6 @@ class MusicNotificationManager(
     }
 
     companion object {
-        // Maybe move that in constant file in utils ?
         const val NOTIFICATION_CHANNEL_ID = "music"
         const val NOTIFICATION_ID = 1
     }

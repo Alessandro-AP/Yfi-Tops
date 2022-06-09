@@ -12,11 +12,16 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.heig.yfitops.domain.models.Song
 
-// Convert media source to a compatible format for exoplayer
+/**
+ * Convert media source to different media formats that are required for exoplayer.
+ */
 class MusicSource {
 
     var playlist = emptyList<MediaMetadataCompat>()
 
+    /**
+     * Convert a list of Song entity to a list of MediaMetadataCompat entity.
+     */
     fun convertFormat(firebasePlayist: List<Song>) {
         playlist = firebasePlayist.map { song ->
             Builder()
@@ -31,6 +36,9 @@ class MusicSource {
         }
     }
 
+    /**
+     * Convert a list of MediaMetadataCompat entity to a media source for exoplayer.
+     */
     fun asMediaSource(dataSourceFactory: DefaultDataSource.Factory): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()
         playlist.forEach { song ->
@@ -41,6 +49,9 @@ class MusicSource {
         return concatenatingMediaSource
     }
 
+    /**
+     * Convert a list of MediaMetadataCompat to a list of MediaItem.
+     */
     fun asMediaItems() = playlist.map { song ->
         val desc = MediaDescriptionCompat.Builder()
             .setMediaId(song.description.mediaId)
