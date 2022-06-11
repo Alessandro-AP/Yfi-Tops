@@ -76,7 +76,7 @@ You'll need the following components to use the project, please install them bef
 - [Java 11](https://openjdk.java.net/projects/jdk/11/)
 - [Android Studio](https://developer.android.com/studio/), with Kotlin plugin and API level 32 installed.
 
-Set up the Firebase media source, respecting the structure shown in section [Firebase Data Structure](#Firebase Data Structure).
+Set up the Firebase media source, respecting the structure shown in section [Firebase Data Structure](#firebase-data-structure).
 
 ### Installation
 
