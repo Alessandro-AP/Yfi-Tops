@@ -25,8 +25,8 @@
       </ul>
     </li>
     <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#project structure">Project Structure</a></li>
-    <li><a href="#firebase data structure">Firebase Data Structure</a></li>
+    <li><a href="#project-structure">Project Structure</a></li>
+    <li><a href="#firebase-data-structure">Firebase Data Structure</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
