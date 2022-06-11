@@ -1,4 +1,4 @@
-package com.heig.yfitops.domain.services
+package com.heig.yfitops.domain.repositories
 
 import android.util.Log
 import androidx.lifecycle.LiveData

@@ -1,4 +1,4 @@
-package com.heig.yfitops.exoplayer
+package com.heig.yfitops.exoplayer.converters
 
 import android.support.v4.media.MediaMetadataCompat
 import com.heig.yfitops.domain.models.Song

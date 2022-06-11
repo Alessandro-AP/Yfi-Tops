@@ -7,7 +7,7 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
-import com.heig.yfitops.exoplayer.MusicSource
+import com.heig.yfitops.exoplayer.converters.MusicSource
 
 /**
  * Class to which playback preparation and play actions are delegated.

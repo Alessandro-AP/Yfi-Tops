@@ -21,7 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
-import com.heig.yfitops.exoplayer.toSong
+import com.heig.yfitops.exoplayer.converters.toSong
 import com.heig.yfitops.ui.bottomsheet.expanded.controls.PlayerSlider
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory

@@ -22,6 +22,8 @@ import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.exoplayer.callbacks.MusicNotificationListener
 import com.heig.yfitops.exoplayer.callbacks.MusicPlaybackPreparer
 import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
+import com.heig.yfitops.exoplayer.converters.MusicSource
+import com.heig.yfitops.exoplayer.notification.MusicNotificationManager
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.*
 

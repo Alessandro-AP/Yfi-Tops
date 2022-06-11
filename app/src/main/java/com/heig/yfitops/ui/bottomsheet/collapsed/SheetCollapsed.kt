@@ -22,7 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.heig.yfitops.MyApp
 import com.heig.yfitops.R
 import com.heig.yfitops.exoplayer.isPlaying
-import com.heig.yfitops.exoplayer.toSong
+import com.heig.yfitops.exoplayer.converters.toSong
 import com.heig.yfitops.ui.bottomsheet.collapsed.modifier.noRippleClickable
 import com.heig.yfitops.viewmodels.MainViewModel
 import com.heig.yfitops.viewmodels.MainViewModelFactory

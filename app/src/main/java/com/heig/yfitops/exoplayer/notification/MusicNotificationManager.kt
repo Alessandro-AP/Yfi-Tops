@@ -1,4 +1,4 @@
-package com.heig.yfitops.exoplayer
+package com.heig.yfitops.exoplayer.notification
 
 import android.app.PendingIntent
 import android.content.Context
