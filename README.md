@@ -7,7 +7,6 @@
     The Yfi Tops Project is a school practical project that aims to extend our skills on android app development and team work. 
     <br />
 <!-- TABLE OF CONTENTS -->
-
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -27,10 +26,12 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#architecture">Architecture</a></li>
     <li><a href="#project structure">Project Structure</a></li>
+    <li><a href="#firebase data structure">Firebase Data Structure</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
+
 
 
 
@@ -127,9 +128,9 @@ Our application consists of four main modules :
 - **ExoPlayer**: This module takes care of the media playback part, allowing our songs to be played, keeping playback in the background and offering a miniplayer in the notification bar. This component in turn is divided into :
   - **Music Service Connector**: this takes care of offering other components/modules of the system all those methods and variables to be able to manage the player.
   - **Music Service**: takes care of initialising and preparing everything necessary for multimedia playback.
-  - **Callbacks**: takes care of performing actions based on specific events
+  - **Callbacks**: takes care of performing actions based on specific events.
   - **Converters**: take care of converting our templates into a format understandable by the player.
-  - **Notification:** takes care of managing the notification system
+  - **Notification:** takes care of managing the notification system.
 
 - **Firebase**: is used to save our music playlists, in particular **Firebase Storage** is used to save all .mp3 files, album images and individual song images. While **Firebase Datastore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the .mp3 file (contained in the Storage).
 
@@ -143,7 +144,15 @@ Below is shown the structuring and description of the different folders of the A
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- FIREBASE DATA STRUCTURE-->
 
+## Firebase Data Structure
+
+The image below shows how the data are organised on Firebase.
+
+![data_structure](images/data_structure.png)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
 
