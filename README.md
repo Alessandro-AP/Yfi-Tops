@@ -24,7 +24,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#architecture">Architecture</a></li>
     <li><a href="#project structure">Project Structure</a></li>
     <li><a href="#firebase data structure">Firebase Data Structure</a></li>
@@ -40,20 +39,19 @@
 
 ## About The Project
 
-![](images/screen_1.jpg)
+Yfi Tops is a music player application for Android written in [Kotlin](https://kotlinlang.org/).
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+The music source (playlists and songs) is loaded from a remote server. 
+We used [Firestore](https://firebase.google.com/docs/firestore) to store music metadata and 
+[Firebase Storage](https://firebase.google.com/docs/storage) to store music tracks.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
+Users can browse different thematic playlists and songs. Tapping on a song will play it through the use of [ExoPlayer](https://exoplayer.dev/).
+The application supports background playback and notification management.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+Here is a preview of the Yfi Tops music player app :
 
-Use the `BLANK_README.md` to get started.
+![app_preview](images/screen_1.jpg)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
@@ -71,47 +69,28 @@ Use the `BLANK_README.md` to get started.
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+You'll need the following components to use the project, please install them beforehand :
+
+- [Java 11](https://openjdk.java.net/projects/jdk/11/)
+- [Android Studio](https://developer.android.com/studio/), with Kotlin plugin and API level 32 installed.
+
+Set up the Firebase media source, respecting the structure shown in section [Firebase Data Structure](#Firebase Data Structure).
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/Alessandro-AP/Yfi-Tops.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+2. Install dependencies with gradle.
+3. Add the Firebase API config file `google-services.json` into the `./app folder`.
+4. Connect your smartphone with Android Studio and run the application.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ARCHITECTURE -->
 
