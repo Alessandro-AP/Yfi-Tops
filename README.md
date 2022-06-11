@@ -6,6 +6,7 @@
   <p align="center">
     The Yfi Tops Project is a school practical project that aims to extend our skills on android app development and team work. 
     <br />
+</div>
 <!-- TABLE OF CONTENTS -->
 
 <details>
