@@ -119,6 +119,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 ![architecture](images/architecture.png)
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 <!-- PROJECT STRUCTURE-->
 
 ## Project Structure
