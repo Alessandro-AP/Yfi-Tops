@@ -6,7 +6,6 @@
   <p align="center">
     The Yfi Tops Project is a school practical project that aims to extend our skills on android app development and team work. 
     <br />
-</div>
 <!-- TABLE OF CONTENTS -->
 
 <details>
@@ -27,6 +26,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#project structure">Project Structure</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -115,16 +115,29 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Architecture
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+The general architecture of the application is shown below.
 
 ![architecture](images/architecture.png)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+Our application consists of four main modules :
+- **Jetpack compose** : it constitutes the entire graphical interface of the application, in which the components constituting the interface and the navigation between them are defined.
+
+- **ViewModels** : these take care of updating the graphical interface dynamically when the livedata change. They are also used as an abstraction layer to communicate with the music service connector. In our case, our ViewModels use (wrap) the livedata contained in the firebase repository.
+
+- **ExoPlayer**: This module takes care of the media playback part, allowing our songs to be played, keeping playback in the background and offering a miniplayer in the notification bar. This component in turn is divided into :
+  - **Music Service Connector**: this takes care of offering other components/modules of the system all those methods and variables to be able to manage the player.
+  - **Music Service**: takes care of initialising and preparing everything necessary for multimedia playback.
+  - **Callbacks**: takes care of performing actions based on specific events
+  - **Converters**: take care of converting our templates into a format understandable by the player.
+  - **Notification:** takes care of managing the notification system
+
+- **Firebase**: is used to save our music playlists, in particular **Firebase Storage** is used to save all .mp3 files, album images and individual song images. While **Firebase Datastore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the .mp3 file (contained in the Storage).
+
 <!-- PROJECT STRUCTURE-->
 
 ## Project Structure
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Below is shown the structuring and description of the different folders of the Android project.
 
 ![tree_structure](images/folders_tree.png)
 
