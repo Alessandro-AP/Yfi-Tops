@@ -22,7 +22,7 @@ import com.heig.yfitops.domain.models.Song
 import com.heig.yfitops.exoplayer.callbacks.MusicNotificationListener
 import com.heig.yfitops.exoplayer.callbacks.MusicPlaybackPreparer
 import com.heig.yfitops.exoplayer.callbacks.MusicPlayerListener
-import com.heig.yfitops.exoplayer.converters.MusicSource
+import com.heig.yfitops.exoplayer.converters.MusicSourceConverter
 import com.heig.yfitops.exoplayer.notification.MusicNotificationManager
 import com.heig.yfitops.utils.Resource
 import kotlinx.coroutines.*
@@ -39,7 +39,7 @@ class MusicService : MediaBrowserServiceCompat() {
 
     // music player related variables
     private lateinit var dataSourceFactory: DefaultDataSource.Factory
-    private val musicSource = MusicSource()
+    private val musicSource = MusicSourceConverter()
     private lateinit var musicPlayerListener: MusicPlayerListener
     private lateinit var musicNotificationManager: MusicNotificationManager
     lateinit var exoPlayer: ExoPlayer

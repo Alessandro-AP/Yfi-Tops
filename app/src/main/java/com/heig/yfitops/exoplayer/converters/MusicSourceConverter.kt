@@ -15,15 +15,15 @@ import com.heig.yfitops.domain.models.Song
 /**
  * Convert media source to different media formats that are required for exoplayer.
  */
-class MusicSource {
+class MusicSourceConverter {
 
     var playlist = emptyList<MediaMetadataCompat>()
 
     /**
      * Convert a list of Song entity to a list of MediaMetadataCompat entity.
      */
-    fun convertFormat(firebasePlayist: List<Song>) {
-        playlist = firebasePlayist.map { song ->
+    fun convertFormat(firebasePlaylist: List<Song>) {
+        playlist = firebasePlaylist.map { song ->
             Builder()
                 .putString(METADATA_KEY_MEDIA_ID, song.id)
                 .putString(METADATA_KEY_TITLE, song.title)

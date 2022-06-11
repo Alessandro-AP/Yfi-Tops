@@ -7,13 +7,13 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
-import com.heig.yfitops.exoplayer.converters.MusicSource
+import com.heig.yfitops.exoplayer.converters.MusicSourceConverter
 
 /**
  * Class to which playback preparation and play actions are delegated.
  */
 class MusicPlaybackPreparer(
-    private val musicSource: MusicSource,
+    private val musicSourceConverter: MusicSourceConverter,
     private val playerPrepared: (MediaMetadataCompat?) -> Unit
 ) : MediaSessionConnector.PlaybackPreparer {
 
@@ -23,7 +23,7 @@ class MusicPlaybackPreparer(
     }
 
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
-        val itemToPlay = musicSource.playlist.find { mediaId == it.description.mediaId }
+        val itemToPlay = musicSourceConverter.playlist.find { mediaId == it.description.mediaId }
         playerPrepared(itemToPlay)
     }
 
