@@ -59,6 +59,10 @@ class MusicService : MediaBrowserServiceCompat() {
 
     override fun onCreate() {
         super.onCreate()
+
+        dataSourceFactory = DefaultDataSource.Factory(applicationContext)
+        initExoPlayer()
+
         val observer = Observer<Resource<List<Song>>> { songs -> //Live data value has changed
 
             songs.data?.let { musicSource.convertFormat(it) }
@@ -79,9 +83,10 @@ class MusicService : MediaBrowserServiceCompat() {
         }
 
         (application as MyApp).repository.currentSongs.observeForever(observer)
+        initSession()
+    }
 
-        dataSourceFactory = DefaultDataSource.Factory(applicationContext)
-
+    private fun initExoPlayer() {
         exoPlayer = ExoPlayer.Builder(applicationContext).build().apply {
             setAudioAttributes(
                 AudioAttributes.Builder()
@@ -94,7 +99,9 @@ class MusicService : MediaBrowserServiceCompat() {
 
         musicPlayerListener = MusicPlayerListener(this)
         exoPlayer.addListener(musicPlayerListener)
+    }
 
+    private fun initSession() {
         // A click on the notification triggers our activity launch
         val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
