@@ -39,11 +39,11 @@
 
 ## About The Project
 
-Yfi Tops is a music player application for Android written in [Kotlin](https://kotlinlang.org/).
+Yfi Tops is a music player application for Android, written in [Kotlin](https://kotlinlang.org/).
 
 The music source (playlists and songs) is loaded from a remote server. 
 We used [Firestore](https://firebase.google.com/docs/firestore) to store music metadata and 
-[Firebase Storage](https://firebase.google.com/docs/storage) to store music tracks.
+[Firebase Storage](https://firebase.google.com/docs/storage) to store media files.
 
 Users can browse different thematic playlists and songs. Tapping on a song will play it through the use of [ExoPlayer](https://exoplayer.dev/).
 The application supports background playback and notification management.
@@ -74,7 +74,7 @@ Here is a preview of the Yfi Tops music player app :
 You'll need the following components to use the project, please install them beforehand :
 
 - [Java 11](https://openjdk.java.net/projects/jdk/11/)
-- [Android Studio](https://developer.android.com/studio/), with Kotlin plugin and API level 32 installed.
+- IDE of your choice, we used [Android Studio](https://developer.android.com/studio/), with Kotlin plugin and API level 32 installed.
 
 Set up the Firebase media source, respecting the structure shown in section [Firebase Data Structure](#firebase-data-structure).
 
@@ -96,29 +96,29 @@ Set up the Firebase media source, respecting the structure shown in section [Fir
 
 ## Architecture
 
-The general architecture of the application is shown below.
+The general architecture of the application is shown below :
 
 ![architecture](images/architecture.png)
 
 Our application consists of four main modules :
-- **Jetpack compose** : it constitutes the entire graphical interface of the application, in which the components constituting the interface and the navigation between them are defined.
+- **Jetpack compose** : it constitutes the entire graphical interface of the application.
 
-- **ViewModels** : these take care of updating the graphical interface dynamically when the livedata change. They are also used as an abstraction layer to communicate with the music service connector. In our case, our ViewModels use (wrap) the livedata contained in the firebase repository.
+- **ViewModels** : take care of updating the graphical interface dynamically when the livedata change. They are also used as an abstraction layer to communicate with the music service connector. In our case, our ViewModels use (wrap) the livedata contained in the firebase repository.
 
-- **ExoPlayer**: This module takes care of the media playback part, allowing our songs to be played, keeping playback in the background and offering a miniplayer in the notification bar. This component in turn is divided into :
-  - **Music Service Connector**: this takes care of offering other components/modules of the system all those methods and variables to be able to manage the player.
-  - **Music Service**: takes care of initialising and preparing everything necessary for multimedia playback.
+- **ExoPlayer**: This module takes care of the media playback part, allowing our songs to be played, keeping playback in the background and offering a miniplayer in the notification bar. This component is divided into :
+  - **Music Service Connector**: provide other components/modules of the app all methods and variables to be able to manage the player.
+  - **Music Service**: takes care of initialising and preparing the multimedia playback.
   - **Callbacks**: takes care of performing actions based on specific events.
-  - **Converters**: take care of converting our templates into a format understandable by the player.
-  - **Notification:** takes care of managing the notification system.
+  - **Converters**: take care of converting our models into formats compatible and required by Exoplayer.
+  - **Notification:** takes care of managing the app in the notification.
 
-- **Firebase**: is used to save our music playlists, in particular **Firebase Storage** is used to save all .mp3 files, album images and individual song images. While **Firebase Datastore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the .mp3 file (contained in the Storage).
+- **Firebase**: use to store our music playlists. **Firebase Storage** is used to save all .mp3 files, album images and individual song images. While **Firebase Datastore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the .mp3 file (contained in the Storage).
 
 <!-- PROJECT STRUCTURE-->
 
 ## Project Structure
 
-Below is shown the structuring and description of the different folders of the Android project.
+Below you can see the structure and description of the different folders of the Android project.
 
 ![tree_structure](images/folders_tree.png)
 
@@ -128,7 +128,7 @@ Below is shown the structuring and description of the different folders of the A
 
 ## Firebase Data Structure
 
-The image below shows how the data are organised on Firebase.
+The image below shows how the data are organised into the Firestore.
 
 ![data_structure](images/data_structure.png)
 
