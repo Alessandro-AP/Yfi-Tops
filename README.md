@@ -112,7 +112,7 @@ Our application consists of four main modules :
   - **Converters**: take care of converting our models into formats compatible and required by Exoplayer.
   - **Notification:** takes care of managing the app in the notification.
 
-- **Firebase**: use to store our music playlists. **Firebase Storage** is used to save all .mp3 files, album images and individual song images. While **Firestore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the .mp3 file (contained in the Storage).
+- **Firebase**: use to store our music playlists. **Firebase Storage** is used to save all audio files, album images and individual song images. While **Firestore**, which is a NoSQL database, contains all the metadata of the playlists/songs, such as the title, author, image and link to the audio file (contained in the Storage).
 
 <!-- PROJECT STRUCTURE-->
 
