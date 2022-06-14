@@ -107,7 +107,7 @@ class MusicService : MediaBrowserServiceCompat() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_MUTABLE)
             } else {
-                PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_ONE_SHOT)
+                PendingIntent.getActivity(this, 0, it, PendingIntent.FLAG_UPDATE_CURRENT)
             }
         }
 
